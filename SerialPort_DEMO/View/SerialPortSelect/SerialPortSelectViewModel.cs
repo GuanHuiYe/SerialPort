@@ -20,8 +20,9 @@ namespace SerialPort_DEMO.View.SerialPortSelect
     }
   }
 
-  class SerialPortSelectViewModel : ModelBase
+  public class SerialPortSelectViewModel : ModelBase
   {
+    public override string Name => "SerialPortSelect";
 
     private SerialPortSession _SelectSerialPort = new SerialPortSession();
 
@@ -42,8 +43,7 @@ namespace SerialPort_DEMO.View.SerialPortSelect
     public ObservableCollection<SerialPortSession> SessionList { get; set; }
 
     public SerialPortSelectViewModel()
-    {
-      Name = "SerialPortSelect";
+    {    
       SessionList = new ObservableCollection<SerialPortSession>();
       ScanSerialPort();
     }

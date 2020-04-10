@@ -65,7 +65,7 @@ namespace System.SerialPort
 
                 BackGroundRead = new BackgroundWorker();
                 BackGroundRead.WorkerSupportsCancellation = true;
-                BackGroundRead.DoWork += new DoWorkEventHandler(BackGroundRead_DoWork);
+                BackGroundRead.DoWork += BackGroundRead_DoWork;
                 BackGroundRead.RunWorkerAsync();
             }
             catch
@@ -97,7 +97,7 @@ namespace System.SerialPort
 
         ~SerialPort()
         {
-            if (BackGroundRead.IsBusy)
+            if ((BackGroundRead??=new BackgroundWorker()).IsBusy)
             {
                 BackGroundRead.CancelAsync();
             }

@@ -18,13 +18,21 @@ namespace SerialPort_DEMO.View.SerialPortSelect
   /// </summary>
   public partial class SerialPortSelect : UserControl
   {
-    private SerialPortSelectViewModel ViewModel;
+    public SerialPortSelectViewModel ViewModel;
 
     public event EventHandler SelectionChanged;
 
     public SerialPortSelect()
-    {    
+    {
+ 
       InitializeComponent();
+      if (this.DataContext != null)
+      {
+        ViewModel = (SerialPortSelectViewModel)this.DataContext; 
+      }
+    }
+    private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
       ViewModel = (SerialPortSelectViewModel)this.DataContext;
     }
 
@@ -32,6 +40,7 @@ namespace SerialPort_DEMO.View.SerialPortSelect
     {
       ViewModel.ScanSerialPort();
     }
+
 
     private void LV_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
@@ -55,5 +64,7 @@ namespace SerialPort_DEMO.View.SerialPortSelect
         SelectionChanged?.Invoke(this, new EventArgs());
       }
     }
+
+ 
   }
 }

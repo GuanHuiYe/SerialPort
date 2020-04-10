@@ -14,18 +14,37 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.SerialPort;
 using MahApps.Metro.Controls;
+using SerialPort_DEMO.View.SerialPortChat;
+using SerialPort_DEMO.View.SerialPortSelect;
 
 namespace SerialPort_DEMO
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : MetroWindow
+  /// <summary>
+  /// Interaction logic for MainWindow.xaml
+  /// </summary>
+  public partial class MainWindow : MetroWindow
   {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-        
+    private MainWindowViewModel ViewModel;
+    public MainWindow()
+    {
+      InitializeComponent();
+      ViewModel = (MainWindowViewModel)this.DataContext;
     }
+
+    private void SerialPortSelect_SelectionChanged(object sender, EventArgs e)
+    {
+      SerialPortSelectViewModel serialPortSelect =
+        (SerialPortSelectViewModel)ViewModel.ViewModels[(int)EnViewModels.SerialPortSelect];
+      ((SerialPortChatViewModel)ViewModel.ViewModels[(int)EnViewModels.SerialPortChat])
+        .ConnectSerialPort(serialPortSelect.SelectSerialPort.SerialLine, serialPortSelect.SelectSerialPort.Speed);
+
+
+      ViewModel.CurrentViewModel = ViewModel.ViewModels[(int)EnViewModels.SerialPortChat];      
+    }
+
+    private void SerialPortChat_BackRequest(object sender, EventArgs e)
+    {
+      ViewModel.CurrentViewModel = ViewModel.ViewModels[(int)EnViewModels.SerialPortSelect];
+    }
+  }
 }

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SerialPort_DEMO"  
         xmlns:SerialPortSelect="clr-namespace:SerialPort_DEMO.View.SerialPortSelect" 
+        xmlns:SerialPortChat="clr-namespace:SerialPort_DEMO.View.SerialPortChat" 
                    
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         GlowBrush="{DynamicResource AccentColorBrush}"
@@ -20,10 +21,13 @@
     </metro:MetroWindow.DataContext>
     <Window.Resources>
         <DataTemplate DataType="{x:Type SerialPortSelect:SerialPortSelectViewModel}">
-            <SerialPortSelect:SerialPortSelect />
+            <SerialPortSelect:SerialPortSelect SelectionChanged="SerialPortSelect_SelectionChanged" />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type SerialPortChat:SerialPortChatViewModel}">
+            <SerialPortChat:SerialPortChat BackRequest="SerialPortChat_BackRequest" />
         </DataTemplate>
     </Window.Resources>
     <Grid Margin="5">
-        <ContentControl Content="{Binding CurrentViewModel}" />
+        <ContentControl x:Name="CurrentView" Content="{Binding CurrentViewModel}" />
     </Grid>
 </metro:MetroWindow>

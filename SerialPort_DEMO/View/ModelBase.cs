@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace SerialPort_DEMO.View
 { 
-  public class ModelBase : INotifyPropertyChanged
+  public abstract class ModelBase : INotifyPropertyChanged
   {
     public event PropertyChangedEventHandler PropertyChanged;
     public void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
@@ -14,6 +14,6 @@ namespace SerialPort_DEMO.View
       PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    public string Name { get; protected set; }
+    public abstract  string Name { get;  }
   }
 }

@@ -8,10 +8,11 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContextChanged="UserControl_DataContextChanged">
+    <!--<UserControl.DataContext>
         <local:SerialPortSelectViewModel/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
